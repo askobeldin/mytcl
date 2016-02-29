@@ -1,0 +1,3 @@
+namespace eval db {variable uid 3}
+array set db::data {1 {this is a test} 2 {текст по-русски} 3 {ептыть! make}}
+array set db::index {k1 2 k2 3 kk 1}
