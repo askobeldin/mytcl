@@ -3,16 +3,16 @@
 #
 
 proc RecordAppend {listName arrayName} {
-	upvar $listName list
-	lappend list $arrayName
+    upvar $listName list
+    lappend list $arrayName
 }
 
 proc RecordIterate {listName script} {
-	upvar $listName list
-	foreach arrayName $list {
-		upvar #0 $arrayName data
+    upvar $listName list
+    foreach arrayName $list {
+        upvar #0 $arrayName data
         eval $script
-	}
+    }
 }
 
 ### script
