@@ -232,75 +232,26 @@ proc auto_import pattern {
     }
 }
 proc auto_execok name {
-    global auto_execs env tcl_platform
+    global auto_execs env
 
     if {[info exists auto_execs($name)]} {
 	return $auto_execs($name)
     }
     set auto_execs($name) ""
-
-    set shellBuiltins [list cls copy date del erase dir echo mkdir  md rename ren rmdir rd time type ver vol]
-    if {$tcl_platform(os) eq "Windows NT"} {
-	# NT includes the 'start' built-in
-	lappend shellBuiltins "start"
-    }
-    if {[info exists env(PATHEXT)]} {
-	# Add an initial ; to have the {} extension check first.
-	set execExtensions [split ";$env(PATHEXT)" ";"]
-    } else {
-	set execExtensions [list {} .com .exe .bat .cmd]
-    }
-
-    if {[string tolower $name] in $shellBuiltins} {
-	# When this is command.com for some reason on Win2K, Tcl won't
-	# exec it unless the case is right, which this corrects.  COMSPEC
-	# may not point to a real file, so do the check.
-	set cmd $env(COMSPEC)
-	if {[file exists $cmd]} {
-	    set cmd [file attributes $cmd -shortname]
-	}
-	return [set auto_execs($name) [list $cmd /c $name]]
-    }
-
     if {[llength [file split $name]] != 1} {
-	foreach ext $execExtensions {
-	    set file ${name}${ext}
-	    if {[file exists $file] && ![file isdirectory $file]} {
-		return [set auto_execs($name) [list $file]]
-	    }
+	if {[file executable $name] && ![file isdirectory $name]} {
+	    set auto_execs($name) [list $name]
 	}
-	return ""
+	return $auto_execs($name)
     }
-
-    set path "[file dirname [info nameof]];.;"
-    if {[info exists env(WINDIR)]} {
-	set windir $env(WINDIR)
-    }
-    if {[info exists windir]} {
-	if {$tcl_platform(os) eq "Windows NT"} {
-	    append path "$windir/system32;"
+    foreach dir [split $env(PATH) :] {
+	if {$dir eq ""} {
+	    set dir .
 	}
-	append path "$windir/system;$windir;"
-    }
-
-    foreach var {PATH Path path} {
-	if {[info exists env($var)]} {
-	    append path ";$env($var)"
-	}
-    }
-
-    foreach ext $execExtensions {
-	unset -nocomplain checked
-	foreach dir [split $path {;}] {
-	    # Skip already checked directories
-	    if {[info exists checked($dir)] || ($dir eq "")} {
-		continue
-	    }
-	    set checked($dir) {}
-	    set file [file join $dir ${name}${ext}]
-	    if {[file exists $file] && ![file isdirectory $file]} {
-		return [set auto_execs($name) [list $file]]
-	    }
+	set file [file join $dir $name]
+	if {[file executable $file] && ![file isdirectory $file]} {
+	    set auto_execs($name) [list $file]
+	    return $auto_execs($name)
 	}
     }
     return ""
