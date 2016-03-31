@@ -25,12 +25,12 @@ proc Serve {chan addr port} {
         }
     }
         close $chan
- }
+}
 
- #catch {console show}                ;##
- if { ! [info exists reload] } {
-    set sk [socket -server Serve 8090]
-    vwait forever
- } else {
-    unset reload
- }
+#catch {console show}                ;##
+if { ! [info exists reload] } {
+   set sk [socket -server Serve 8090]
+   vwait forever
+} else {
+   unset reload
+}
