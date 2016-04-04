@@ -16,5 +16,5 @@ puts $ccCmd
 set string "The regular      expression metacharacters       in \$unique1 and \$unique need 
 to be quoted so they are not     treated as metacharacters."
 
-regsub -all {\s+} $string "+" string
+regsub -all {\s+} $string " " string
 puts $string
