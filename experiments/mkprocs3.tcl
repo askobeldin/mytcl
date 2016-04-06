@@ -1,9 +1,9 @@
 # try to make some procs dynamically
 #
 proc ask-user-template {msg} {
-    set tmsg "-msg"
-    append tmsg ": "
-    puts -nonewline $tmsg
+    set t "-msg"
+    append t ": "
+    puts -nonewline $t
     flush stdout
     return [gets stdin]
 }
