@@ -3,4 +3,4 @@ rectangle 7 7 153 53 2 blue
 text 80 30 "Simple Drawing Tool" c red
 
 
-rectangle 1 1 173 73 2 red
+# rectangle 1 1 173 73 2 red
