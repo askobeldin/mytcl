@@ -1,4 +1,7 @@
-# regexp testing 2
+# doregexp.tcl
+#
+# usage: doregexp {([^:]*):} "sage:0.1" match host
+#
 #
 proc doregexp {expression text args} {
     puts "Evaluate: regexp $expression $text $args"
@@ -21,3 +24,4 @@ doregexp {([^:]+)://([^:/]+)(:([0-9]+))?(/.*)} "http://www.beedub.com:80/index.h
     match protocol server x port path
 doregexp {([^:-]*)-} "sage-0.1" match host
 doregexp {([^:-]*)-([0-9]*?).([0-9]*?)} "sage-03.142" match host n1 n2
+doregexp {([^:-]*)-(\d*?).(\d*?)} "sage-03.142" match host n1 n2
