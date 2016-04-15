@@ -11,9 +11,9 @@ set arg1 [lindex $argv 0]
 # puts "Argument of script is $arg1"
 
 if {$arg1 eq ""} {
-    set testing_files [glob -types f test*.tcl]
+    set testing_files [lsort [glob -types f test*.tcl]]
 } else {
-    set testing_files [glob -types f $arg1*.tcl]
+    set testing_files [lsort [glob -types f $arg1*.tcl]]
 }
 
 # do testing

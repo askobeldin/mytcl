@@ -10,7 +10,7 @@ proc doregexp {expression text args} {
         puts "Results:"
         foreach {n} $args {
             upvar 0 $n v
-            puts "$n = $v"
+            puts "$n: \'$v\'"
         }
         puts [string repeat \n 1]
     } else {
