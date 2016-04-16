@@ -18,6 +18,6 @@ if {$arg1 eq ""} {
 
 # do testing
 foreach scriptfile $testing_files {
-    puts "*** Файл с тестами: $scriptfile ***\n"
+    puts "*** Test file: $scriptfile ***\n"
     source -encoding utf-8 $scriptfile
 }
