@@ -18,4 +18,4 @@ proc printProcs {file} {
 }
 
 
-printProcs aaa
+printProcs aaa.swp

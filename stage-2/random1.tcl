@@ -17,6 +17,8 @@ proc RandomRange {range} {
 
 
 RandomInit [pid]
-Random
-Random
-RandomRange 100
+
+for {set x 0} {$x < 10} {incr x} {
+    puts "[expr {$x + 1}] [Random]"
+}
+puts [RandomRange 100]

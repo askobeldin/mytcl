@@ -8,8 +8,8 @@ proc verbose_eval {script} {
     if {$line eq {}} {continue}
         append cmd $line\n
         if {[info complete $cmd]} {
-            puts -nonewline $cmd
-            puts -nonewline [uplevel 1 $cmd]
+            puts "cmd: [string trim $cmd]"
+            puts [string trim [uplevel 1 $cmd]]
             set cmd ""
         }
     }
