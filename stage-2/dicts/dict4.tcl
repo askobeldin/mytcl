@@ -8,6 +8,21 @@ proc print-by-name {varName} {
     puts "$varName = $var"
 }
 
+# a nested dict pretty printer
+# see: tcl/tk dev guide, pg. 158
+proc show-dict {dct {indent 0}} {
+    # if dict keys fails - this is not a dictionary
+    if {[catch {dict keys $dct}]} {
+        puts "[string repeat " " $indent]$dct"
+        return
+    }
+    foreach k [dict keys $dct] {
+        puts "[string repeat " " $indent]$k"
+        set v [dict get $dct $k]
+        show-dict $v [expr {$indent + 4}]
+    }
+}
+
 set example [dict create firstname Ann initial E \
             surname Huan title Miss]
 print-by-name example
@@ -19,7 +34,9 @@ set shopping {fruit apple veg carrot}
 dict lappend shopping fruit orange
 dict lappend shopping fruit banana
 dict lappend shopping veg cabbage beans
-print-by-name shopping
+#print-by-name shopping
+puts "dictionary shopping"
+show-dict $shopping
 
 proc computeHistogram {text} {
     set frequencies {}

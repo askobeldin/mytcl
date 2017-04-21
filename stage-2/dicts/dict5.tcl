@@ -94,4 +94,5 @@ puts "b: [stepCounter $b]"
 puts "b: [stepCounter $b]"
 puts "a: [stepCounter $a]"
 puts "a: [stepCounter $a]"
-puts $counters
+#puts $counters
+print-by-name counters

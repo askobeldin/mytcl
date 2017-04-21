@@ -3,9 +3,9 @@
 #
 
 # load parser
-source parser1.tcl
+source -encoding utf-8 parser1.tcl
 # load config file
-source config1.tcl
+source -encoding utf-8 config1.tcl
 
 # output
 parray a_sources

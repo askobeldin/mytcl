@@ -17,7 +17,8 @@ proc Source {id info} {
 
    # Remember the info of this source in a global array.
    global a_sources
-   set a_sources($id,info) $info
+   #set a_sources($id,info) $info
+   set a_sources($id,info) [string trim $info]
 }
 
 # The parsing procedure for the 'Category' keyword is similar.
@@ -26,7 +27,8 @@ proc Category {id info} {
    lappend l_categories $id
 
    global a_categories
-   set a_categories($id,info) $info
+   #set a_categories($id,info) $info
+   set a_categories($id,info) [string trim $info]
 }
 
 # This is the parsing procedure for the 'Pattern' keyword.
@@ -45,6 +47,8 @@ proc Pattern {name args} {
    # the sub-structures.
    # This is similar to how we use the 'source' command to parse the entire
    # data file.
+   # XXX: my code here
+   #puts "### in proc Pattern command \"lindex \$args end\" returns [lindex $args end]"
    uplevel 1 [lindex $args end]
 
    # We're no longer inside a pattern body, so set curPattern to empty.
@@ -81,5 +85,6 @@ proc Sources {sourceList} {
 proc Info {info} {
    global curPattern
    global a_patterns
-   set a_patterns($curPattern,info) $info
+   #set a_patterns($curPattern,info) $info
+   set a_patterns($curPattern,info) [string trim $info]
 }
