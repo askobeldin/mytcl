@@ -3,6 +3,10 @@
 # ch7, sect. 7.5, pg. 184
 # updating dictionary values
 #
+
+# load pdict
+source -encoding utf-8 pdict.tcl
+
 proc print-by-name {varName} {
     upvar $varName var
     puts "$varName = $var"
@@ -25,18 +29,22 @@ proc show-dict {dct {indent 0}} {
 
 set example [dict create firstname Ann initial E \
             surname Huan title Miss]
-print-by-name example
+#print-by-name example
+pdict example
 
 dict append example firstname ie
-print-by-name example
+#print-by-name example
+pdict example
 
 set shopping {fruit apple veg carrot}
 dict lappend shopping fruit orange
 dict lappend shopping fruit banana
 dict lappend shopping veg cabbage beans
 #print-by-name shopping
-puts "dictionary shopping"
-show-dict $shopping
+puts "### dictionary shopping ###"
+#show-dict $shopping
+pdict shopping
+pdict $shopping
 
 proc computeHistogram {text} {
     set frequencies {}
@@ -55,7 +63,8 @@ puts [computeHistogram "да епта this day is a happy happy day епта"]
 dict update example firstname v1 surname v2 {
     lassign [list $v1 $v2] v2 v1
 }
-print-by-name example
+#print-by-name example
+pdict example
 
 # This example shows how to make a square-a-value operation
 proc squareValue {dictVar key} {
@@ -66,10 +75,12 @@ proc squareValue {dictVar key} {
 }
 
 set polyFactors {C 1 x 2 y 3}
-print-by-name polyFactors
+#print-by-name polyFactors
+pdict example
 
 squareValue polyFactors y
-print-by-name polyFactors
+#print-by-name polyFactors
+pdict example
 
 # One tricky feature is that updates to the variable containing the dictionary
 # happen only when the body of the dict update command finishes, and the key-value
@@ -82,11 +93,14 @@ dict update example surname s notes n initial i {
     unset s
     set n "have initial = [info exists i]"
     # print the current contents of the dictionary
-    puts $example
+    #puts $example
+    pdict example
 }
 
 # Get the contents of the variable after the dict update command has completed;
 # note it is different in several respects, but the value for 'title' is
 # unchanged because that key was not listed at the start of the command
-puts $example
-print-by-name example
+
+#puts $example
+#print-by-name example
+pdict example
