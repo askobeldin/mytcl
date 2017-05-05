@@ -1,6 +1,8 @@
-# calculator.tcl --
-#    Script to emulate a calculator, allows the on-the-spot
-#    evaluation of expressions as well the use of macros
+# http://wiki.tcl.tk/2822
+# calculator.tcl
+#
+# Script to emulate a calculator, allows the on-the-spot
+# evaluation of expressions as well the use of macros
 #
 # Author: Arjen Markus (arjen.markus@wldelft.nl)
 #
